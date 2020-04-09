@@ -15,13 +15,7 @@ How to maintain data consistency across services?
 
 Implement each business transaction that spans multiple services as a saga. A saga is a sequence of local transactions. Each local transaction updates the database and publishes a message or event to trigger the next local transaction in the saga. If a local transaction fails because it violates a business rule then the saga executes a series of compensating transactions that undo the changes that were made by the preceding local transactions.
 
-Order Service (Loal Transaction)
-			  ||
-		    \/
-Customer Service (Loal Transaction)
-			  ||
-		    \/
-Order Service (Loal Transaction)
+Order Service (Loal Transaction) ---> Customer Service (Loal Transaction) ---> Order Service (Loal Transaction)
 
 **There are two ways of coordination sagas:**
 
